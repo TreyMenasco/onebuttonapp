@@ -32,4 +32,12 @@ Deploy the contents of `build/web`. The Flutter source is in `lib/main.dart`; `w
 
 ## Validation
 
-Flutter was not available on PATH in the conversion environment, so compilation and runtime validation have not been performed. After installing the SDK, run `flutter analyze` and launch the app with the commands above.
+Use Flutter 3.47.2 (the version pinned in CI). Run `flutter analyze`, `flutter test`, and `flutter build web --release` to validate the app. Widget tests cover repeated color changes and a narrow screen.
+
+## GitHub Actions
+
+Pushes and pull requests to `main`, `master`, and `upgrade` run analysis, tests, and web/Android release builds. You can also run the workflow manually. Download `android-apk` and `web-build` from the successful workflow run's artifacts.
+
+CI generates the Android runner with the pinned Flutter SDK because native platform files are not checked in. The generated runner uses Flutter's default development signing configuration; configure your own signing key before store distribution.
+
+Pushing a tag beginning with `v` also creates a GitHub release and attaches the APK after the build succeeds. Ordinary branch pushes do not publish a release.
