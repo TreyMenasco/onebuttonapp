@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#c8f0df">
+  <title>One Little Button</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #182820; background: #c8f0df; }
+    body { margin: 0; min-height: 100svh; display: grid; place-items: center; padding: 24px; transition: background-color 500ms ease; background: #c8f0df; }
+    main { text-align: center; }
+    .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+    h1 { margin: 18px 0 12px; font-size: clamp(42px, 9vw, 80px); line-height: 1.05; letter-spacing: -.065em; font-weight: 750; }
+    .intro { margin: 0 0 42px; font-size: 17px; opacity: .7; }
+    button { border: 0; border-radius: 100px; background: #182820; color: white; padding: 22px 36px; font: inherit; font-size: 18px; font-weight: 600; cursor: pointer; box-shadow: 0 8px 0 #18282025; transition: transform 150ms ease, box-shadow 150ms ease; touch-action: manipulation; }
+    button:hover { transform: translateY(-3px); box-shadow: 0 11px 0 #18282025; }
+    button:active { transform: translateY(5px); box-shadow: 0 3px 0 #18282025; }
+    button:focus-visible { outline: 3px solid #182820; outline-offset: 7px; }
+    #status { margin-top: 30px; min-height: 24px; font-size: 13px; letter-spacing: .04em; opacity: .65; }
+    @media (prefers-reduced-motion: reduce) { body, button { transition: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">One little button</p>
+    <h1>A change of scenery.</h1>
+    <p class="intro">A little color can change your day.</p>
+    <button type="button" id="change-color">Give me a new color ↗</button>
+    <p id="status" role="status" aria-live="polite">Mint condition · #C8F0DF</p>
+  </main>
+  <script>
+    const colors = [
+      { name: 'Mint condition', hex: '#C8F0DF' },
+      { name: 'Peach of a day', hex: '#FFD6BD' },
+      { name: 'Lavender daydream', hex: '#E0D4FA' },
+      { name: 'Blue sky thinking', hex: '#C5E5FA' },
+      { name: 'Hello, sunshine', hex: '#F8E6A0' },
+      { name: 'Rose-colored moment', hex: '#F6CDDB' },
+      { name: 'Fresh perspective', hex: '#DFECC1' }
+    ];
+    let current = 0;
+    document.querySelector('#change-color').addEventListener('click', () => {
+      current = (current + 1 + Math.floor(Math.random() * (colors.length - 1))) % colors.length;
+      const color = colors[current];
+      document.body.style.backgroundColor = color.hex;
+      document.querySelector('meta[name="theme-color"]').content = color.hex;
+      document.querySelector('#status').textContent = `${color.name} · ${color.hex}`;
+    });
+  </script>
+</body>
+</html>

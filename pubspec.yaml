@@ -1,0 +1,14 @@
+name: one_button_app
+description: A single button that brings a little color to your day.
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
